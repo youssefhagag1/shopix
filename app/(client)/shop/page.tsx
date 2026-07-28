@@ -1,9 +1,13 @@
-import React from 'react'
+import Shop from '@/components/Shop';
+import { Brand, Category } from '@/sanity.types';
+import { getAllBrands, getCategories } from '@/sanity/queries';
 
-function ShopPage() {
+async function ShopPage() {
+  const categories = await getCategories() as Category[];
+  const brands = await getAllBrands() as Brand[];
   return (
     <div>
-      shop paeg
+      <Shop categories={categories} brands={brands} />
     </div>
   )
 }

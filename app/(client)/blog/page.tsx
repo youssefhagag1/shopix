@@ -2,13 +2,11 @@ import Container from '@/components/Container'
 import { Title } from '@/components/text'
 import React from 'react'
 
-async function page({ params }: Promise<{ params: { slug: string } }>) {
-  const { slug } = await params;
+function page() {
   return (
     <div>
       <Container>
-        <Title>Single Blog Post</Title>
-        <p>{slug}</p>
+        <Title></Title>
       </Container>
     </div>
   )
