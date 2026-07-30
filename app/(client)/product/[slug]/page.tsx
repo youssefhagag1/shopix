@@ -13,7 +13,11 @@ import { CornerDownLeft, StarIcon, Truck } from 'lucide-react';
 import ProductCharacteristics from '@/components/ProductCharacteristics';
 import notFound from '@/app/not-found';
 
-async function page({ params }: Promise<{slug: string }>) {
+async function page({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const product = await getProductBySlug(slug) as Product;
   if(!product) {
