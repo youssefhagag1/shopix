@@ -53,7 +53,7 @@ const CategoryProducts = ({ categories, slug }: Props) => {
             key={item?._id}
             className={`bg-transparent p-0  rounded-none text-dark shadow-none hover:bg-shop-orange hover:text-white font-semibold hoverEffect border-b last:border-b-0 transition-colors capitalize ${item?.slug?.current === currentSlug && "bg-shop-orange text-white border-shop-orange"}`}
           >
-            <p className="w-full text-left px-2">{item?.name}</p>
+            <p className="w-full text-left px-2">{item?.title}</p>
           </Button>
         ))}
       </div>

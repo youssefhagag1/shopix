@@ -8,14 +8,14 @@ export const categoryType = defineType({
   icon: TagIcon,
   fields: [
     defineField({
-      name: "name",
+      name: "title",
       type: "string",
     }),
     defineField({
         name : "slug",
         type : "slug",
         options : {
-            source : "name",
+        source : "title",
             maxLength : 96
         },
         validation : (Rule) => Rule.required()
@@ -45,7 +45,7 @@ export const categoryType = defineType({
     ],
     preview : {
       select : {
-          title : "name",
+          title : "title",
           subtitle : "description",
           media : "image"
       }

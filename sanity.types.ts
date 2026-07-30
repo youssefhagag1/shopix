@@ -296,7 +296,7 @@ export type Category = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  name?: string;
+  title?: string;
   slug?: Slug;
   image?: {
     asset?: SanityImageAssetReference;

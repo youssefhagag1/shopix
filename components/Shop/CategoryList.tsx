@@ -33,7 +33,7 @@ function CategoryList({
             <label
               className={` ${selectedCategory === category?.slug?.current ? "font-semibold text-shop-dark-green" : "font-normal"} text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70`}
             >
-              {category?.name as string}
+              {category?.title as string}
             </label>
           </div>
         ))}
