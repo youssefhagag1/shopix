@@ -485,7 +485,7 @@ export type LATEST_BLOG_QUERY_RESULT = Array<{
 
 // Source: sanity/queries/query.ts
 // Variable: DEAL_PRODUCTS
-// Query: *[_type == 'product' && status == 'hot'] | order(name asc){    ...,"categories": categories[]->title  }
+// Query: *[_type == 'product' && status == 'hot'] | order(name asc)
 export type DEAL_PRODUCTS_RESULT = Array<{
   _id: string;
   _type: "product";
@@ -505,7 +505,11 @@ export type DEAL_PRODUCTS_RESULT = Array<{
   description?: string;
   price?: number;
   discount?: number;
-  categories: Array<null> | null;
+  categories?: Array<
+    {
+      _key: string;
+    } & CategoryReference
+  >;
   stock?: number;
   brand?: BrandReference;
   status: "hot";
@@ -742,7 +746,7 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type=='brand'] | order(name asc) ": BRANDS_QUERY_RESULT;
     " *[_type == 'blog' && isLatest == true]|order(name asc){\n      ...,\n      blogcategories[]->{\n      title\n    }\n    }": LATEST_BLOG_QUERY_RESULT;
-    "*[_type == 'product' && status == 'hot'] | order(name asc){\n    ...,\"categories\": categories[]->title\n  }": DEAL_PRODUCTS_RESULT;
+    "*[_type == 'product' && status == 'hot'] | order(name asc)": DEAL_PRODUCTS_RESULT;
     '*[_type == "product" && slug.current == $slug] | order(name asc) [0]': PRODUCT_BY_SLUG_QUERY_RESULT;
     '*[_type == "product" && slug.current == $slug]{\n  "brandName": brand->title\n  }': BRAND_QUERY_RESULT;
     "*[_type == 'order' && clerkUserId == $userId] | order(orderData desc){\n...,products[]{\n  ...,product->\n}\n}": MY_ORDERS_QUERY_RESULT;
