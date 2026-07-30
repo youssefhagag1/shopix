@@ -1,6 +1,5 @@
 import Container from "@/components/Container";
 import {Title} from "@/components/text";
-import { SINGLE_BLOG_QUERY_RESULT } from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
 import {
   getBlogCategories,
@@ -21,7 +20,7 @@ const SingleBlogPage = async ({
   params: Promise<{ slug: string }>;
 }) => {
   const { slug } = await params;
-  const blog: SINGLE_BLOG_QUERY_RESULT = await getSingleBlog(slug);
+  const blog = await getSingleBlog(slug);
   if (!blog) return notFound();
 
   return (
@@ -41,7 +40,7 @@ const SingleBlogPage = async ({
             <div className="text-xs flex items-center gap-5 my-7">
               <div className="flex items-center relative group cursor-pointer">
                 {blog?.blogcategories?.map(
-                  (item: { title: string }, index: number) => (
+                  (item: { title?: string | null }, index: number) => (
                     <p
                       key={index}
                       className="font-semibold text-shop_dark_green tracking-wider"
@@ -205,7 +204,7 @@ const BlogLeft = async ({ slug }: { slug: string }) => {
               key={index}
               className="text-lightColor flex items-center justify-between text-sm font-medium"
             >
-              <p>{blogcategories[0]?.title}</p>
+              <p>{blogcategories?.[0]?.title}</p>
               <p className="text-darkColor font-semibold">{`(1)`}</p>
             </div>
           ))}
@@ -214,7 +213,7 @@ const BlogLeft = async ({ slug }: { slug: string }) => {
       <div className="border border-lightColor p-5 rounded-md mt-10">
         <Title className="text-base">Latest Blogs</Title>
         <div className="space-y-4 mt-4">
-          {blogs?.map((blog: Blog, index: number) => (
+          {blogs?.map((blog: { title?: string | null; mainImage?: { asset?: { _ref?: string }; _type?: string } | null; slug?: { current?: string } | null }, index: number) => (
             <Link
               href={`/blog/${blog?.slug?.current}`}
               key={index}
