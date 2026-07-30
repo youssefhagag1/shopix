@@ -1,4 +1,5 @@
 "use client";
+import { createCheckoutSession, Metadata } from "@/actions/createCheckout";
 import AddToWishlistButton from "@/components/AddToWishlistButton";
 import Container from "@/components/Container";
 import EmptyCart from "@/components/EmptyCart";
@@ -53,7 +54,25 @@ const CartPage = () => {
     }
   };
   const handleCheckout = async () => {
-
+    setLoading(true);
+    try {
+      const metadata: Metadata = {
+        orderNumber: crypto.randomUUID(),
+        customerName: user?.firstName ?? "Unknown",
+        customerEmail: user?.emailAddresses[0]?.emailAddress ?? "Unknown",
+        clerkUserId: user?.id as string,
+        address: selectedAddress,
+      };
+        const chekoutUrl = await createCheckoutSession(groupedItems, metadata);
+        if (chekoutUrl) {
+          window.location.href = chekoutUrl;
+        }
+    }catch (error) {
+      console.error("Checkout error:", error);
+      toast.error("An error occurred during checkout. Please try again.");
+    }finally {
+      setLoading(false);
+    }
   }
 
   const fetchAddresses = async () => {
@@ -183,9 +202,10 @@ const CartPage = () => {
                       Reset Cart
                     </Button>
                   </div>
+                  
                 </div>
                 <div>
-                  <div className="lg:col-span-1">
+                  <div className="lg:col-span-1 bg-white">
                     <div className="hidden md:inline-block w-full bg-white p-6 rounded-lg border">
                       <h2 className="text-xl font-semibold mb-4">
                         Order Summary
@@ -261,7 +281,7 @@ const CartPage = () => {
                     </div>
                   )}
                 </div>
-                <div className="md:hidden fixed bottom-0 left-0 w-full bg-white pt-2">
+                <div className="md:hidden z-999 fixed bottom-0 left-0 w-full bg-white pt-2">
                   <div className="bg-white p-4 rounded-lg border mx-4">
                     <h2>Order Summary</h2>
                     <div className="space-y-4">
