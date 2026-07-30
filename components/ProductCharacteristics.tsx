@@ -17,7 +17,7 @@ const ProductCharacteristics = async ({
   console.log(brand);
 
   return (
-    <Accordion type="single" collapsible>
+    <Accordion>
       <AccordionItem value="item-1">
         <AccordionTrigger>{product?.name}: Characteristics</AccordionTrigger>
         <AccordionContent>

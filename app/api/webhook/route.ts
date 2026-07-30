@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";
 import { Stripe } from "stripe";
-import { Metadata } from "@/actions/createCheckOut";
+import { Metadata } from "@/actions/createCheckout";
 import { stripe } from "@/lib/stripe";
 import { backendClient } from "@/sanity/lib/backendClient";
 
@@ -78,7 +78,7 @@ async function createOrderInSanity(
   } = session;
 
   const { orderNumber, customerName, customerEmail, clerkUserId, address } =
-    metadata as Metadata & {
+    metadata as unknown as Metadata & {
       address: string | null;
       clerkUserId: string;
     };
