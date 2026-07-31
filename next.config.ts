@@ -6,10 +6,11 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "cdn.sanity.io",
-  },
+      },
     ],
   },
   reactCompiler: true,
+  output: "standalone",
 };
 
 export default nextConfig;
