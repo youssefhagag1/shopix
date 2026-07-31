@@ -15,7 +15,7 @@ function SideMenu({ isOpen, onClose }: SideMenuProps) {
   const sidebarRef = useOutsideClick<HTMLDivElement>(onClose);
   return (
     <div
-      className={`fixed inset-0 z-50 flex w-full bg-black/50 text-white/80 shadow-xl ${
+      className={`fixed h-screen inset-0 z-50 flex w-full bg-black/50 text-white/80 shadow-xl ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       } transition-transform duration-300 ease-in-out`}
     >
